@@ -1,45 +1,149 @@
+/* ===== HOME PAGE ===== */
+.home-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
 
-.login-form {
-    max-width: 300px;
-    margin: 0 auto;
-    padding: 30px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background: #f9f9f9;
-    position:absolute;
-    top:200px;
-    left:20%;
-    
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    display: block;
-    font-weight: bold;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 12px;
-    margin-top: 9px;
-    border: 0.1px solid #ccc;
-    border-radius: 3px;
-  }
-  
-  button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+.home-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.home-header .school-icon {
+  font-size: 60px;
+  margin-bottom: 10px;
+}
+
+.home-header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.home-header p {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.95rem;
+  margin-top: 8px;
+}
+
+.login-forms-container {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ===== SHARED CARD STYLE ===== */
+.login-form,
+.admin-login-form {
+  position: relative !important;
+  top: unset !important;
+  left: unset !important;
+  width: 320px;
+  padding: 35px 30px;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+
+.login-form h2,
+.admin-login-form h2 {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.login-form .role-badge,
+.admin-login-form .role-badge {
+  display: block;
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* ===== FORM GROUPS ===== */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 7px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group input,
+.login-form input,
+.admin-login-form input {
+  width: 100%;
+  padding: 12px 15px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.form-group input::placeholder,
+.login-form input::placeholder,
+.admin-login-form input::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+
+.form-group input:focus,
+.login-form input:focus,
+.admin-login-form input:focus {
+  border-color: rgba(99, 179, 237, 0.7);
+  background: rgba(255,255,255,0.15);
+  box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.15);
+}
+
+/* ===== BUTTONS ===== */
+button[type="submit"],
+.login-form button,
+.admin-login-form button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 8px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+button[type="submit"]:hover,
+.login-form button:hover,
+.admin-login-form button:hover {
+  background: linear-gradient(135deg, #764ba2, #667eea);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}

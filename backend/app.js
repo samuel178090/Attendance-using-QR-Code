@@ -2,14 +2,13 @@ const express=require("express")
 const bodyParser = require('body-parser');
 const app=express()
 const cookieParser=require("cookie-parser")
-// const cors = require('cors');
+const cors = require('cors');
 
-// app.use(cors());
-// app.use(cors({
-//     origin: 'http://localhost:3000', 
-//     methods: 'GET,PUT,POST,DELETE',
-//     allowedHeaders: 'Content-Type,Authorization'
-//   }));
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    methods: 'GET,PUT,POST,DELETE',
+    credentials: true
+}));
   
 app.use(express.json())
 app.use(cookieParser())

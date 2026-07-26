@@ -21,7 +21,8 @@ const initialState = {
       case 'ATTENDANCE_MARKED_SUCCESS':
         return {
           ...state,
-          successResponse: action.payload
+          successResponse: action.payload,
+          error: null
         };
       default:
         return state;

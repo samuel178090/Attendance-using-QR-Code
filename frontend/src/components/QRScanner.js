@@ -1,35 +1,30 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {QrReader} from 'react-qr-reader';
-
-import { attendanceMarkedSuccess,markAttendance } from '../actions/qrActionStudent';
+import { QrReader } from 'react-qr-reader';
+import { markAttendance } from '../actions/qrActionStudent';
 
 const StudentAttendanceScanner = () => {
   const dispatch = useDispatch();
-  const {scannedData,error} = useSelector(state => state.qrScanner);
-  
+  const { user } = useSelector(state => state.user);
+  const { successResponse, error } = useSelector(state => state.qrScanner);
 
-  const handleScan = (data) => {
-    if (data) {
-      dispatch(attendanceMarkedSuccess(data)); // Store scanned data in Redux state
-      dispatch(markAttendance(data)); // Dispatch action to mark attendance
+  const handleResult = (result) => {
+    if (result?.text && user?._id) {
+      dispatch(markAttendance(result.text, user._id));
     }
   };
 
-  const handleError = (err) => {
-    // console.error(err);
-    // Handle errors during QR scanning
-  };
-
   return (
-    <div style={{ position:"absolute", width: '20%', height: '40%',top:"300px" }}>
-      <QrReader
-        delay={300}
-        onError={handleError}
-        onScan={handleScan}
-       
-      />
-      <p>Scanned Data: {scannedData}</p>
+    <div>
+      <div style={{ width: '100%', borderRadius: '12px', overflow: 'hidden' }}>
+        <QrReader
+          onResult={handleResult}
+          constraints={{ facingMode: 'environment' }}
+          style={{ width: '100%' }}
+        />
+      </div>
+      {successResponse && <p style={{ color: '#38ef7d', marginTop: '15px', fontWeight: 600 }}>✅ Attendance Marked Successfully!</p>}
+      {error && <p style={{ color: '#ff6b6b', marginTop: '15px' }}>❌ {error}</p>}
     </div>
   );
 };

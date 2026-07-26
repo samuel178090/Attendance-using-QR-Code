@@ -7,6 +7,7 @@ const { isAuthenticatedAdmin } = require('../middleware/auth');
 
 /// admin route
 
+router.route("/register").post(adminController.register);
 router.route("/login").post(adminController.login);
 router.route("/logout").get(adminController.logout);
 router.route("/getAllAdmins").get(isAuthenticatedAdmin,adminController.getAllAdmin);
