@@ -12,6 +12,7 @@ import ProtectedRoute from './components/Route/protectedRoute';
 import AdminProtected from './components/Route/adminProtected';
 import StudentList from './admin/StudentList';
 import AdminQRCodeDisplay from './components/QRCode';
+import AttendanceReport from './components/AttendanceReport';
 
 function App() {
 
@@ -31,43 +32,41 @@ function App() {
      <Router>
          <Routes>
              <Route exact path="/" element={<Home />} />
-             <Route
-                exact
-                path="/admin/dashboard"
+             <Route exact path="/admin/dashboard"
                 element={
                     <AdminProtected adminisAuthenticated={adminisAuthenticated} adminuser={adminuser} adminloading={adminloading}>
                      <AdminDashboard />
                   </AdminProtected>
                   }
                   />
-                   <Route
-                exact
-                path="/all-students"
+             <Route exact path="/all-students"
                 element={
                     <AdminProtected adminisAuthenticated={adminisAuthenticated} adminuser={adminuser} adminloading={adminloading}>
                      <StudentList/>
                   </AdminProtected>
                   }
                   />
-                      <Route
-                exact
-                path="/admin/qrcode"
+             <Route exact path="/admin/qrcode"
                 element={
                     <AdminProtected adminisAuthenticated={adminisAuthenticated} adminuser={adminuser} adminloading={adminloading}>
                      <AdminQRCodeDisplay/>
                   </AdminProtected>
                   }
                   />
-             <Route
-                exact
-                path="/student/dashboard"
+             <Route exact path="/admin/attendance-report"
+                element={
+                    <AdminProtected adminisAuthenticated={adminisAuthenticated} adminuser={adminuser} adminloading={adminloading}>
+                     <AttendanceReport/>
+                  </AdminProtected>
+                  }
+                  />
+             <Route exact path="/student/dashboard"
                 element={
                     <ProtectedRoute isAuthenticated={isAuthenticated} user={user} loading={loading}>
                      <StudentDashboard />
                   </ProtectedRoute>
                   }
                   />
-                
             </Routes>
      </Router>
      </>

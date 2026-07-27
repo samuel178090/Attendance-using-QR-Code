@@ -17,8 +17,25 @@ const attendenceController = {
 
     getAllStudentAttendance: async (req, res) => {
         try {
-            const allAttendance = await Attendance.find();
+            const allAttendance = await Attendance.find().populate('student', 'rollNo email');
             return res.status(200).json(allAttendance);
+        } catch (err) {
+            return res.status(500).json({ message: 'Internal Server Error' });
+        }
+    },
+
+    getAttendanceReport: async (req, res) => {
+        try {
+            const Student = require('../models/Student');
+            const allStudents = await Student.find();
+            const allAttendance = await Attendance.find().populate('student', 'rollNo email');
+
+            const presentIds = new Set(allAttendance.map(a => a.student?._id?.toString()));
+
+            const present = allStudents.filter(s => presentIds.has(s._id.toString())).map(s => ({ _id: s._id, rollNo: s.rollNo, email: s.email, status: 'Present' }));
+            const absent = allStudents.filter(s => !presentIds.has(s._id.toString())).map(s => ({ _id: s._id, rollNo: s.rollNo, email: s.email, status: 'Absent' }));
+
+            return res.status(200).json({ present, absent, total: allStudents.length });
         } catch (err) {
             return res.status(500).json({ message: 'Internal Server Error' });
         }

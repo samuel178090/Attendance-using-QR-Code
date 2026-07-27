@@ -87,6 +87,21 @@ const AdminDashboard = () => {
                             transition: 'all 0.3s'
                         }}>📱 Generate QR Code</button>
                     </Link>
+
+                    <Link to="/admin/attendance-report" style={{ textDecoration: 'none' }}>
+                        <button style={{
+                            width: '220px',
+                            padding: '16px',
+                            background: 'linear-gradient(135deg, #f7971e, #ffd200)',
+                            border: 'none',
+                            borderRadius: '12px',
+                            color: '#fff',
+                            fontSize: '1rem',
+                            fontWeight: 600,
+                            cursor: 'pointer',
+                            transition: 'all 0.3s'
+                        }}>📊 Attendance Report</button>
+                    </Link>
                 </div>
             </div>
         </div>
