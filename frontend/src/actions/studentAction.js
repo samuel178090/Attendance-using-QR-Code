@@ -15,6 +15,7 @@ export const login = (rollNo, password) => async (dispatch) => {
       );
   
       dispatch({ type: 'LOGIN_SUCCESS', payload: data.student });
+      localStorage.setItem('studentToken', data.tokenStudent);
     } catch (error) {
       dispatch({ type: 'LOGIN_FAIL', payload: error.response.data.message });
     }
@@ -51,6 +52,7 @@ export const register = (myForm) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   try {
     await API.get(`/student/logout`);
+    localStorage.removeItem('studentToken');
 
     dispatch({ type: 'LOGOUT_SUCCESS' });
   } catch (error) {
