@@ -1,4 +1,4 @@
-import axios from "axios";
+import API from '../axiosConfig';
 
 // Login admin
 export const login = (email, password) => async (dispatch) => {
@@ -7,7 +7,7 @@ export const login = (email, password) => async (dispatch) => {
   
       const config = { headers: { "Content-Type": "application/json" } };
   
-      const { data } = await axios.post(
+      const { data } = await API.post(
         `/admin/login`,
         { email, password },
         config
@@ -23,7 +23,7 @@ export const login = (email, password) => async (dispatch) => {
  // Logout Admin
 export const logout = () => async (dispatch) => {
   try {
-    await axios.get(`/admin/logout`);
+    await API.get(`/admin/logout`);
 
     dispatch({ type: 'LOGOUT_SUCCESS_ADMIN' });
   } catch (error) {

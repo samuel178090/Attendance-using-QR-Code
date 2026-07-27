@@ -1,5 +1,5 @@
 
-import axios from "axios";
+import API from '../axiosConfig';
 
 // Login
 export const login = (rollNo, password) => async (dispatch) => {
@@ -8,7 +8,7 @@ export const login = (rollNo, password) => async (dispatch) => {
   
       const config = { headers: { "Content-Type": "application/json" } };
         
-      const { data } = await axios.post(
+      const { data } = await API.post(
         `/student/login`,
         { rollNo, password },
         config
@@ -27,7 +27,7 @@ export const register = (myForm) => async (dispatch) => {
   
       const config = { headers: { "Content-Type": "application/json" } };
   
-      const { data } = await axios.post(`/student/register`, myForm, config);
+      const { data } = await API.post(`/student/register`, myForm, config);
   
       dispatch({ type: 'REGISTER_USER_SUCCESS', payload: data.student });
     } catch (error) {
@@ -50,7 +50,7 @@ export const register = (myForm) => async (dispatch) => {
  // Logout student
 export const logout = () => async (dispatch) => {
   try {
-    await axios.get(`/student/logout`);
+    await API.get(`/student/logout`);
 
     dispatch({ type: 'LOGOUT_SUCCESS' });
   } catch (error) {
@@ -64,7 +64,7 @@ export const logout = () => async (dispatch) => {
 export const getAllUsers = () => async (dispatch) => {
   try {
     dispatch({ type: 'ALL_USERS_REQUEST' });
-    const { data } = await axios.get(`/student/getAllStudents`);
+    const { data } = await API.get(`/student/getAllStudents`);
 
     dispatch({ type: 'ALL_USERS_SUCCESS', payload: data.Students});
   } catch (error) {
@@ -76,7 +76,7 @@ export const getAllUsers = () => async (dispatch) => {
 export const getUserDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: 'USER_DETAILS_REQUEST' });
-    const { data } = await axios.get(`/student/getSingleStudent/${id}`);
+    const { data } = await API.get(`/student/getSingleStudent/${id}`);
 
     dispatch({ type: 'USER_DETAILS_SUCCESS', payload: data.student });
   } catch (error) {
@@ -89,7 +89,7 @@ export const deleteUser = (id) => async (dispatch) => {
   try {
     dispatch({ type: 'DELETE_USER_REQUEST' });
 
-    const { data } = await axios.delete(`/student/deleteStudent/${id}`);
+    const { data } = await API.delete(`/student/deleteStudent/${id}`);
 
     dispatch({ type: 'DELETE_USER_SUCCESS', payload: data });
   } catch (error) {
