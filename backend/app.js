@@ -5,7 +5,14 @@ const cookieParser=require("cookie-parser")
 const cors = require('cors');
 
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: (origin, callback) => {
+        const allowed = process.env.FRONTEND_URL?.replace(/\/$/, '');
+        if (!origin || origin.replace(/\/$/, '') === allowed) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: 'GET,PUT,POST,DELETE',
     credentials: true
 }));
